@@ -55,7 +55,7 @@ class NewPost extends React.Component{
         if (this.validateForm(this.state.errors)) {
           //Valid form
          
-          if(this.state.title === '' && this.state.body === '') {
+          if(this.state.title === '' && (this.state.body === '' || this.state.body === "<p><br></p>")) {
 
             let errors = this.state.errors;
             errors.title = "Warning: Title Field cannot be empty"
@@ -63,9 +63,20 @@ class NewPost extends React.Component{
             document.getElementById("body").className = 'error'
             document.getElementById("title").className = 'error'
             this.setState({errors: errors, submitForm: false });
-          } else {
 
-            this.setState({ submitForm: true, title : '', body : '', errors : { title : "Warning: Title Field cannot be empty", body : "Warning: Body Field cannot be empty" }})
+          } else if(this.state.title !== "" &&  (this.state.body === '' || this.state.body === "<p><br></p>")) {
+            let errors = this.state.errors;
+            errors.body =  "Warning: Body Field cannot be empty"
+            document.getElementById("body").className = 'error'
+            this.setState({errors: errors, submitForm: false });
+
+          } else if(this.state.title === '' && (this.state.body !== '' || this.state.body !== "<p><br></p>")) {
+            let errors = this.state.errors;
+            errors.title = "Warning: Title Field cannot be empty"
+            document.getElementById("title").className = 'error'
+            this.setState({errors: errors, submitForm: false });
+
+          } else {
             const post = {
                 title : this.state.title,
                 body : this.state.body
@@ -73,7 +84,8 @@ class NewPost extends React.Component{
 
             this.props.dispatch(setPost(post))
             
-            alert('New Post is successfully published')
+            alert('New Post is created and can be found in Published section')
+            this.setState({ submitForm: true, title : '', body : '', errors : { title : "Warning: Title Field cannot be empty", body : "Warning: Body Field cannot be empty" }})
 
           }
         } else {
@@ -84,6 +96,7 @@ class NewPost extends React.Component{
 
       
     render(){
+      console.log(this.state, "STATE")
         return(
             <div className="new-post-wrapper">
                 <h3 className="new-post-header">Create New Post</h3>
