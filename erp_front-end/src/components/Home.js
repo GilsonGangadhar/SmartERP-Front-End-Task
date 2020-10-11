@@ -27,6 +27,9 @@ class Home extends React.Component {
         })
     }
 
+    /*below codes is to search and filter based on title / body of the post or article in the
+    searchBar in the line 34, 35 & 36
+    */
     handleSearch = (e) => {
         const searchedText = e.target.value
         const searchedPosts = this.props.posts.filter(post => {

@@ -21,6 +21,10 @@ class NewPost extends React.Component{
     handleTitle = (e) => {
         let errors = this.state.errors;
         errors.title = e.target.value.length === 0 ? "Warning: Title Field cannot be empty" : "";
+
+        /*below "document.getElemenById("title").className" means giving className to title's input tag for change of color when its empty
+        while submitting.
+        */
       
         if(errors.title.length > 0) {
           document.getElementById("title").className = 'error'
@@ -31,9 +35,15 @@ class NewPost extends React.Component{
         this.setState({ errors: errors, title: e.target.value, submitForm: false });
       }
       
+      // in reactQuill component (text editor), by defualt instead of empyty string, it will be "<p><br></p>"
+
       handleQuill = (data) => {
         let errors = this.state.errors;
         errors.body =  data === "<p><br></p>" ? "Warning: Body Field cannot be empty" : "";
+
+        /*here "document.getElemenById("body").className" means giving className to body's reactQuill component for change of color 
+         when its empty while submitting.
+        */
       
         if(errors.body.length > 0) {
           document.getElementById("body").className = 'error'
@@ -44,6 +54,11 @@ class NewPost extends React.Component{
         this.setState({ errors: errors, body: data, submitForm: false });
       }
 
+      /*
+      below function is to verify whether the values of "this.state.error" object is empty or not. if its empty, validateForm function 
+      returns true or else return false
+      */
+
        validateForm = (errors) => {
         let valid = true;
         Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
@@ -52,8 +67,10 @@ class NewPost extends React.Component{
       
       handleSubmit = (e) => {
         e.preventDefault();
+
+        // validate function is called with errors obj as its props, if its true, then below codes are executed 
+
         if (this.validateForm(this.state.errors)) {
-          //Valid form
          
           if(this.state.title === '' && (this.state.body === '' || this.state.body === "<p><br></p>")) {
 
@@ -76,6 +93,7 @@ class NewPost extends React.Component{
             document.getElementById("title").className = 'error'
             this.setState({errors: errors, submitForm: false });
 
+          // validateForm function checks whether this.state.error is either true or false. if its false, then below codes are executed
           } else {
             const post = {
                 title : this.state.title,
@@ -135,6 +153,10 @@ class NewPost extends React.Component{
         )
     }
 }
+
+/*below codes got from reactQuill documentation. coped and pased as per instruction. In the line 163, we get to choose what kinds of text 
+editors we want. Saw from internet.
+*/
 
 NewPost.modules = {
     toolbar: [

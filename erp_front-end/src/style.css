@@ -134,6 +134,8 @@ html, body {
         padding: 0px 10px;
     }
   
+    /* below codes are for red outline on input Tags & body area and also for error message
+       in the NewPost.js component */
 
   .error {
       border: 2px solid red !important;
