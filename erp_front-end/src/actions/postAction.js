@@ -1,7 +1,10 @@
 
 
-const setPost = (post) => {
-    return {type: 'SET_POSTS', payload: post}
+export const setPost = (post) => {
+    return {type: 'SET_POST', payload: post}
 }
 
-export default setPost
+
+export const searchPosts = (posts) => {
+    return {type : 'SEARCHED_POSTS', payload : posts}
+}

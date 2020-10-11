@@ -9,9 +9,16 @@ class PublishedPosts extends React.Component{
             <div className="published-posts">
                 <h3 className="new-post-header">Published Posts</h3>
                 {
-                    this.props.posts.map((post,i) => {
+                    this.props.searchedPosts.length === 0 ? this.props.posts.map((post,i) => {
                         return (
-                            <div className="post-card">
+                            <div className="post-card" key={i}>
+                                <h2 className="post-card-title">{i + 1}. {post.title}</h2>
+                                <p className="post-card-body">{parse(post.body)}</p>
+                            </div>
+                        )
+                    }) : this.props.searchedPosts.map((post,i) => {
+                        return (
+                            <div className="post-card" key={i}>
                                 <h2 className="post-card-title">{i + 1}. {post.title}</h2>
                                 <p className="post-card-body">{parse(post.body)}</p>
                             </div>
@@ -25,8 +32,9 @@ class PublishedPosts extends React.Component{
 
 const mapStateToProps = (state) => {
     return{
-        posts : state.posts
+        posts : state.posts.postArray,
+        searchedPosts: state.posts.searchedArray
     }
 }
 
-export default connect(mapStateToProps)(PublishedPosts)
+export default connect(mapStateToProps)(PublishedPosts) 

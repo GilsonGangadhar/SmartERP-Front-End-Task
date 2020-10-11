@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import setPost from '../actions/postAction'
+import {setPost} from '../actions/postAction'
 import ReactQuill from 'react-quill'
 import "../../node_modules/react-quill/dist/quill.snow.css";
 
@@ -28,7 +28,7 @@ class NewPost extends React.Component{
           document.getElementById("title").className = ''
         }
       
-        this.setState({ errors: errors, title: e.target.value });
+        this.setState({ errors: errors, title: e.target.value, submitForm: false });
       }
       
       handleQuill = (data) => {
@@ -41,7 +41,7 @@ class NewPost extends React.Component{
           document.getElementById("body").className = ''
         }
       
-        this.setState({ errors: errors, body: data });
+        this.setState({ errors: errors, body: data, submitForm: false });
       }
 
        validateForm = (errors) => {
@@ -63,15 +63,18 @@ class NewPost extends React.Component{
             document.getElementById("body").className = 'error'
             document.getElementById("title").className = 'error'
             this.setState({errors: errors, submitForm: false });
-          }else {
+          } else {
+
+            this.setState({ submitForm: true, title : '', body : '', errors : { title : "Warning: Title Field cannot be empty", body : "Warning: Body Field cannot be empty" }})
             const post = {
                 title : this.state.title,
                 body : this.state.body
             }
+
             this.props.dispatch(setPost(post))
-    
+            
             alert('New Post is successfully published')
-            this.setState({ submitForm: true })
+
           }
         } else {
           //InValid form
@@ -79,6 +82,7 @@ class NewPost extends React.Component{
         }
       }
 
+      
     render(){
         return(
             <div className="new-post-wrapper">

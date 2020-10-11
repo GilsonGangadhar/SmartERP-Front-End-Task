@@ -2,6 +2,7 @@ import React from 'react'
 import NewPost from './NewPost'
 import PublishedPosts from './PublishedPosts'
 import { connect } from 'react-redux'
+import { searchPosts } from '../actions/postAction'
 
 class Home extends React.Component {
 
@@ -10,8 +11,7 @@ class Home extends React.Component {
         this.state = {
             searchedText : '',
             createPost : false,
-            posts : [],
-            searchedTitles : []
+            posts : []        
         }
     }
 
@@ -27,18 +27,25 @@ class Home extends React.Component {
         })
     }
 
-    handleText = (e) => {
+    handleSearch = (e) => {
         const searchedText = e.target.value
-        const searchedTitles = this.props.posts.filter(post => {
-            return post.title.includes(searchedText)
+        const searchedPosts = this.props.posts.filter(post => {
+            return post.title.includes(searchedText) || post.body.includes(searchedText)
         })
-        this.setState({searchedTitles})
+        if(searchedText !== '') {
+            this.props.dispatch(searchPosts(searchedPosts))
+            this.setState({searchedText})
+        } else {
+            this.props.dispatch(searchPosts([]))
+            this.setState({searchedText})
+        }
     }
+    
     render(){
         return(
             <div className="Home-container">
                 <div className="search-nav">
-                    <input type="text" value={this.state.searchedText} onChange={this.handleText} placeholder="Search"/>
+                    <input type="search" value={this.state.searchedText} onChange={this.handleSearch} placeholder="Search"/>
                 </div>
                 <div className="buttons-nav">
                     <button onClick={this.handleNewPost}>New Post </button>
@@ -58,7 +65,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        posts : state.posts
+        posts : state.posts.postArray
     }
 }
 
