@@ -9,7 +9,7 @@ class PublishedPosts extends React.Component{
             <div className="published-posts">
                 <h3 className="new-post-header">Published Posts</h3>
 
-        {/* here "parse()" is used to parse html format. We get it from package : html-react-parser */}
+        {/* here "parse()" method is used to parse html in a string. We get it from package : html-react-parser */}
                 {
                     this.props.searchedPosts.length === 0 ? this.props.posts.map((post,i) => {
                         return (

@@ -13,6 +13,8 @@ html, body {
     box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
 }
 
+/* for search input tag styling*/
+
 .search-nav input {
 	padding:9px 11px;
     outline:none;
@@ -21,6 +23,7 @@ html, body {
 	border-radius:20px;
 }
 
+/*for nav bar buttons*/
 
 .buttons-nav {
     margin-top: 3px;
@@ -30,7 +33,7 @@ html, body {
     align-items: center;
     justify-content: space-around;
 }
-  
+
   button {
     border: none;
     background-color: #0B6482;
@@ -81,6 +84,7 @@ html, body {
 	border-radius:20px;
 }
 
+/*text-editor styling. 'ql' stands for Quill*/
 
 .body .ql-container {
     border-bottom-left-radius: 0.5em;
@@ -118,6 +122,9 @@ html, body {
     margin: 0 auto;
     margin-bottom: 10px;
   }
+
+  /*below codes are for published component styling*/
+
 
   .post-card:hover {
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
