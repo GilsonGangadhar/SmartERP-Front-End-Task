@@ -35,7 +35,7 @@ class NewPost extends React.Component{
         this.setState({ errors: errors, title: e.target.value, submitForm: false });
       }
       
-      // in reactQuill component (text editor), by defualt instead of empyty string, it will be "<p><br></p>"
+      // in reactQuill component (text editor), by defualt instead of empty string, it will be "<p><br></p>"
 
       handleQuill = (data) => {
         let errors = this.state.errors;
@@ -154,8 +154,8 @@ class NewPost extends React.Component{
     }
 }
 
-/*below codes got from reactQuill documentation. coped and pased as per instruction. In the line 163, we get to choose what kinds of text 
-editors we want. Saw from internet.
+/*below codes got from reactQuill documentation. copied and pased as per instruction. In the line 165, we get to choose what kinds of text 
+editors we want.
 */
 
 NewPost.modules = {
