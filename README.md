@@ -7,5 +7,6 @@ Dependencies used: React, React-dom, Redux, React-redux, React-Quill.
  Redux - To create Redux store. To share common data to all components connected to it,
  React-Redux - To Connect redux store with React components,
  React-Quill - Package to use text editor. 
+ and html-react-parser - package used for parsing html data (of text-editor) to string
 
 
